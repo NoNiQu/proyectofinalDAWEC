@@ -14,7 +14,7 @@ let pokemonsData = [];
 async function cargarPokemon() {
   for (let i = 1; i <= 151; i++) {
     try {
-      const response = await fetch(`http://localhost:9090/pokemon/${i}`);
+      const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`);
       const jsondata = await response.json();
       pokemonsData.push(jsondata); // Guardar los datos en el array global
       procesarJSON(jsondata);

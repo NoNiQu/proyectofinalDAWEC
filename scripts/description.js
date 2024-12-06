@@ -17,7 +17,7 @@ async function cargarDetallePokemon() {
     // Primer fetch para obtener la descripción y el genus
     try {
         console.log("Obteniendo datos de la especie del Pokémon...");
-        const response = await fetch(`http://localhost:9090/pokemon-species/${pokemonId}`);
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonId}`);
         const jsondataSpecies = await response.json();
         console.log("Datos de la especie obtenidos:", jsondataSpecies);
 
@@ -54,7 +54,7 @@ async function cargarDetallePokemon() {
     // Segundo fetch para obtener los detalles del Pokémon
     try {
         console.log("Obteniendo datos del Pokémon...");
-        const response = await fetch(`http://localhost:9090/pokemon/${pokemonId}`);
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
         const jsondata = await response.json();
         console.log("Datos del Pokémon obtenidos:", jsondata);
         mostrarDetalle(jsondata);
