@@ -1,33 +1,35 @@
-let spriteVersion = "red-blue"; // Por defecto, sprites de Pokémon Rojo/Azul
-let descripcion = ""; // Variable global para la descripción del Pokémon
+// Variable para controlar qué sprites mostrar (por defecto, los sprites de Pokémon Rojo/Azul).
+let spriteVersion = "red-blue";
+let descripcion = ""; // Variable para la descripción del Pokémon.
 
-// Cargar los detalles del Pokémon
+// Cargar los detalles del Pokémon.
 async function cargarDetallePokemon() {
     const urlParams = new URLSearchParams(window.location.search);
-    const pokemonId = parseInt(urlParams.get('id')); // Obtener el ID del Pokémon desde la URL
+    const pokemonId = parseInt(urlParams.get('id')); // Obtener el ID del Pokémon desde la URL.
 
+    // Comprobar si se ha recibido un ID correctamente.
     if (!pokemonId) {
         console.error("No se ha proporcionado un ID de Pokémon.");
         return;
     }
 
-    // Actualizar los enlaces de navegación
+    // Actualizar los enlaces de navegación.
     actualizarEnlacesDeFlechas(pokemonId);
 
-    // Primer fetch para obtener la descripción y el genus
+    // Primer fetch para obtener la descripción y el genus (categoría).
     try {
         console.log("Obteniendo datos de la especie del Pokémon...");
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonId}`);
         const jsondataSpecies = await response.json();
         console.log("Datos de la especie obtenidos:", jsondataSpecies);
 
-        // Extraer el genus (categoría) para mostrar
+        // Extraer el genus (categoría) para mostrar.
         const genusData = jsondataSpecies.genera.find(
             (entry) => entry.language.name === "en"
         );
         const genus = genusData ? genusData.genus : null;
 
-        // Filtrar la descripción para la versión y el idioma
+        // Filtrar la descripción para la versión y el idioma.
         if (spriteVersion === "yellow") {
             descripcion = jsondataSpecies.flavor_text_entries
                 .filter(entry => entry.language.name === "en" && entry.version.name === "yellow")
@@ -94,7 +96,7 @@ function mostrarDetalle(jsondata) {
     // Usar la función para actualizar la descripción
     actualizarDescripcionEnCard(descripcion, parentElement);
 
-    // Mostrar el genus
+    // Mostrar el genus (categoría). Hay que añadirle "POKEMON" a cada categoría antes de mostrarla.
     const genusContenedor = parentElement.querySelector('#tipoPokemonDetalle');
     if (descripcion && descripcion.genus) {
         const genusSinPokemon = descripcion.genus.replace(/Pokémon/i, "").trim();
@@ -109,7 +111,7 @@ function mostrarDetalle(jsondata) {
 }
 
 
-// Función para actualizar el sprite del Pokémon en la tarjeta
+// Función para actualizar el sprite del Pokémon en la tarjeta.
 function actualizarSpriteEnCard(pokemon, columna) {
     let spriteImg = columna.querySelector(`#spritePokemonDetalle`);
     if (spriteVersion === "yellow") {

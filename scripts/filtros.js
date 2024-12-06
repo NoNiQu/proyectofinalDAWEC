@@ -1,15 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
     let plantilla = document.getElementById("cardPokemon");
     let contenedor = plantilla.parentNode;
-
-    // Remover la plantilla original para usarla como base
     contenedor.removeChild(plantilla);
 
-    // Variable para almacenar datos cargados
+    // Variable para almacenar los datos de los Pokémon que obtenemos de la API.
     let pokemonsData = [];
 
-    // Variable para controlar qué sprites mostrar
-    let spriteVersion = "red-blue"; // Por defecto, sprites de Pokémon Rojo/Azul
+    // Variable para controlar qué sprites mostrar (por defecto, los sprites de Pokémon Rojo/Azul).
+    let spriteVersion = "red-blue";
 
     // Función para cargar Pokémon
     async function cargarPokemon() {
@@ -25,41 +23,39 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Función para procesar cada Pokémon
+    // Función para procesar cada Pokémon que recoge el fetch.
     function procesarJSON(jsondata) {
         if (!jsondata.id) return;
 
-        // Clonar la plantilla y añadirla al contenedor
+        // Clonar la plantilla y añadirla al contenedor.
         let columna = plantilla.cloneNode(true);
         contenedor.appendChild(columna);
         columna.setAttribute("id", `CardPokemon${jsondata.id}`);
 
-        // Formatear el ID del Pokémon
+        // Formatear el ID del Pokémon.
         let formattedID = jsondata.id.toString().padStart(3, "0");
 
-        // Asignar el ID del Pokémon
+        // Asignar el ID del Pokémon.
         let propiedad = columna.querySelector("#idpokemon");
         propiedad.textContent = formattedID;
 
-        // Asignar la imagen del Pokémon
+        // Asignar la imagen del Pokémon.
         propiedad = columna.querySelector("#spritePokemon");
         propiedad.setAttribute("id", `spritePokemon${jsondata.id}`);
-
-        // Actualizar sprite con la imagen de la versión seleccionada
+        // Actualizar sprite con la imagen de la versión seleccionada.
         actualizarSpriteEnCard(jsondata, columna);
 
-        // Crear el enlace a la página de descripción
+        // Crear el enlace a la página de descripción (descripcion.html).
         let enlace = columna.querySelector("#enlacePokemon");
         if (enlace) {
             enlace.setAttribute("href", `descripcion.html?id=${jsondata.id}`);
         }
     }
 
-    // Función para actualizar la imagen del sprite en la tarjeta
+    // Función para actualizar la imagen del sprite en la tarjeta.
     function actualizarSpriteEnCard(pokemon, columna) {
         let spriteImg = columna.querySelector(`#spritePokemon${pokemon.id}`);
         if (spriteVersion === "yellow") {
-            // Usamos los sprites de la versión "yellow"
             spriteImg.setAttribute(
                 "src",
                 pokemon.sprites?.versions?.["generation-i"]?.["yellow"]?.front_default ||
@@ -67,7 +63,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 ""
             );
         } else {
-            // Usamos los sprites de la versión "red-blue" (gris)
             spriteImg.setAttribute(
                 "src",
                 pokemon.sprites?.versions?.["generation-i"]?.["red-blue"]?.front_gray || ""
@@ -75,18 +70,18 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Funciones para cambiar entre las versiones de sprites (Red/Blue vs Yellow)
+    // EventListeners para los botones que cambian los sprites.
     document.querySelector(".iconoRB").addEventListener("click", () => {
-        spriteVersion = "red-blue"; // Cambiar a sprites de Rojo/Azul (gris)
+        spriteVersion = "red-blue"; // Cambiar a sprites de Rojo/Azul (blanco y negro).
         actualizarSprites();
     });
 
     document.querySelector(".iconoA").addEventListener("click", () => {
-        spriteVersion = "yellow"; // Cambiar a sprites de Amarillo (color)
+        spriteVersion = "yellow"; // Cambiar a sprites de Amarillo (color).
         actualizarSprites();
     });
 
-    // Función para actualizar todos los sprites de las tarjetas
+    // Función para actualizar todos los sprites de las tarjetas.
     function actualizarSprites() {
         pokemonsData.forEach((pokemon) => {
             let card = document.querySelector(`#CardPokemon${pokemon.id}`);
@@ -166,7 +161,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Configurar el listener para el botón de "Show All"
     document.getElementById('btnShollAll').addEventListener('click', mostrarTodosLosPokemons);
 
-    // Cargar los primeros 151 Pokémon cuando la página se cargue
+    // Cargar los primeros 151 Pokémon cuando la página se cargue. Esta función llamará al resto de funciones necesarias.
     cargarPokemon();
 });
 
