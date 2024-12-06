@@ -135,7 +135,7 @@ function actualizarDescripcionEnCard(descripcion, columna) {
     if (descripcion) {
         // Reemplazar "Pokémon" con tilde por "Pokemon" sin tilde
         const descripcionSinAcento = descripcion.flavor_text.replace(/Pokémon/gi, "Pokemon");
-        descripcionElemento.textContent = descripcionSinAcento;
+        descripcionElemento.textContent = descripcionSinAcento.replace(/\f/gi, " ");
     } else {
         descripcionElemento.textContent = "Descripción no disponible.";
     }
