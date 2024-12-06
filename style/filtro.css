@@ -1,0 +1,153 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+@font-face {
+    font-family: pokemon-font;
+    src: url('../assets/font/PKMNRBYGSC.woff2') format('woff2');
+}
+
+body {
+    font-family: pokemon-font;
+    text-transform: uppercase;
+}
+
+.ajuste {
+    font-family: pokemon-font;
+    text-transform: uppercase;
+}
+
+.botonx {
+    color: gray;
+}
+
+.pixel-border {
+    position: relative;
+    background-color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.pixel-border::before {
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    z-index: -1;
+    background-color: black;
+    box-shadow: 0 0 0 2px white, 2px 2px 0 2px black, 4px 4px 0 2px white;
+}
+
+.iconoRB,
+.iconoA {
+    width: 40px;
+}
+
+.iconoRB:hover,
+.iconoA:hover {
+    cursor: pointer;
+}
+
+/* Aplicar la fuente al select y las opciones */
+select,
+select option {
+    font-family: pokemon-font, sans-serif;
+    /* Aquí debes poner la fuente personalizada */
+    text-transform: uppercase;
+    /* Para que todo esté en mayúsculas */
+}
+
+/* Deshabilitar el estilo nativo del select */
+select {
+    -webkit-appearance: none;
+    /* Chrome, Safari */
+    -moz-appearance: none;
+    /* Firefox */
+    appearance: none;
+    /* Para otros navegadores */
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-family: pokemon-font, sans-serif;
+    /* Fuente personalizada */
+    text-transform: uppercase;
+}
+
+/* Aplicar el estilo para las opciones (aunque algunas no lo soportan) */
+select option {
+    font-family: pokemon-font, sans-serif;
+    text-transform: uppercase;
+}
+
+/* Para que la flecha no aparezca en algunos navegadores (si lo deseas) */
+select::-ms-expand {
+    display: none;
+}
+
+/* Personalizar la flecha de selección */
+select::after {
+    content: '\25BC';
+    /* Símbolo de flecha hacia abajo */
+    font-family: pokemon-font;
+    color: #000;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    /* No interferir con la selección */
+}
+
+/* Estilo para el contenedor de los resultados */
+#contenedorResultados {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-height: 650px;
+    /* Ajusta la altura según tus necesidades */
+    overflow-y: auto;
+    /* Permite el desplazamiento vertical si hay más de 28 resultados */
+    margin-top: 20px;
+}
+
+@media (max-width: 1200px) {
+
+    header .container div:nth-child(1) {
+        flex-direction: column;
+    }
+
+    header .container div:nth-child(2) {
+        margin-top: 30px;
+    }
+
+    .col-3 {
+        width: 100%;
+    }
+
+    .koko {
+        flex-direction: column;
+    }
+
+    .col-8{
+        width: 100%;
+    }
+
+    #contenedorResultados {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        overflow-y: visible;
+        margin-top: 50px;
+    }
+
+    #enlacePokemon{
+        width: 100%;
+        text-align: center;
+    }
+}

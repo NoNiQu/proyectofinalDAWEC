@@ -1,0 +1,105 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+@font-face {
+    font-family: pokemon-font;
+    src: url(../assets/font/PKMNRBYGSC.woff2);
+}
+
+body {
+    font-family: pokemon-font;
+}
+
+.pixel-border {
+    position: relative;
+    background-color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.pixel-border::before {
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    z-index: -1;
+    background-color: black;
+    box-shadow: 0 0 0 2px white, 2px 2px 0 2px black, 4px 4px 0 2px white;
+}
+
+.parent {
+    text-transform: uppercase;
+}
+
+.div1{
+    font-size: 40px;
+    cursor: auto;
+}
+.div3 h4{
+    font-size: 40px !important;
+}
+.div4, .div5, .div6{
+    font-size: 25px;
+}
+
+.botonx{
+    color: gray;
+}
+
+.botonx:hover{
+    color: black;
+}
+
+/* Estilos adicionales */
+.iconoRB,
+.iconoA {
+    width: 40px;
+}
+
+.iconoRB:hover,
+.iconoA:hover {
+    cursor: pointer;
+}
+
+@media (max-width: 1200px) {
+
+    header .container div:nth-child(1){
+        flex-direction: column;
+    }
+    header .container div:nth-child(2){
+        margin-top: 30px;
+    }
+    
+    .jojo{
+        flex-direction: column;
+        align-items: center;
+    }
+    .col-3 h4{
+        margin-top: 10px !important;
+    }
+    .col-6{
+        width: 100%;
+        text-align: center;
+    }
+    .div3 h4{
+        width: 100%;
+        font-size: 30px !important;
+        font-weight: bolder;
+    }
+    .div4 h4{
+        width: 100%;
+        font-size: 20px !important;
+    }
+
+    .div1 p{
+        font-size: 20px;
+    }
+
+}
