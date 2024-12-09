@@ -18,8 +18,7 @@ body {
     background-color: #ffffff;
     border: none;
     padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
+    font-size: 35px;
 }
 
 .pixel-border::before {
@@ -93,16 +92,14 @@ body {
     }
     .div3 h4{
         width: 100%;
-        font-size: 30px !important;
-        font-weight: bolder;
+        font-size: 35px !important;
     }
-    .div4 h4{
+    .div4, .div5, .div6 p{
         width: 100%;
         font-size: 20px !important;
     }
 
     .pixel-border {
-        padding: 0px;
-        font-size: 12px;
+        font-size: 20px;
     }
 }
