@@ -38,15 +38,17 @@ body {
     text-transform: uppercase;
 }
 
-.div1{
-    font-size: 40px;
+.div1 {
+    font-size: 2.5rem;
     cursor: auto;
 }
-.div3 h4{
-    font-size: 40px !important;
+
+.div3 h4 {
+    font-size: 2.5rem !important;
 }
-.div4, .div5, .div6{
-    font-size: 25px;
+
+.div4, .div5, .div6 {
+    font-size: 1.5625rem;
 }
 
 .botonx{

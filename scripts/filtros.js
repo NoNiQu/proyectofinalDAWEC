@@ -141,8 +141,17 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
 
-    // Mostrar los Pokémon filtrados y ordenados
-    filteredPokemons.forEach(procesarJSON);
+    // Comprobar si se encontraron resultados
+    if (filteredPokemons.length === 0) {
+      // Mostrar el mensaje de "Not Found"
+      let mensajeNotFound = document.createElement("p");
+      mensajeNotFound.textContent = "POKEMON Not Found";
+      mensajeNotFound.style.color = "red"; // Cambia el color si lo deseas
+      contenedor.appendChild(mensajeNotFound);
+    } else {
+      // Mostrar los Pokémon filtrados y ordenados
+      filteredPokemons.forEach(procesarJSON);
+    }
 
     // Asegurarse de que los resultados se muestren
     document.getElementById("contenedorResultados").classList.remove("d-none");
@@ -178,6 +187,22 @@ document.addEventListener("DOMContentLoaded", function () {
   document
     .getElementById("btnShollAll")
     .addEventListener("click", mostrarTodosLosPokemons);
+
+  // Configurar el listener para que solo permita texto en el campo de nombre
+  document
+    .getElementById("pokemonName")
+    .addEventListener("keypress", function (event) {
+      // Expresión regular que permite letras (mayúsculas y minúsculas) y espacio
+      const regex = /^[a-zA-Z\s]*$/;
+
+      // Obtener el carácter que se ha presionado
+      const char = String.fromCharCode(event.which || event.keyCode);
+
+      // Si no coincide con la expresión regular, detener el evento
+      if (!regex.test(char)) {
+        event.preventDefault();
+      }
+    });
 
   // Cargar los primeros 151 Pokémon cuando la página se cargue. Esta función llamará al resto de funciones necesarias.
   cargarPokemon();

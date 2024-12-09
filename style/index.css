@@ -40,11 +40,11 @@ body {
 }
 
 .card-title {
-    font-size: 15px !important;
+    font-size: 0.9375rem !important;
 }
 
 .tipoPokemon {
-    font-size: 12px !important;
+    font-size: 0.75rem !important;
 }
 
 .iconoRB{
