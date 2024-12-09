@@ -102,19 +102,7 @@ body {
     }
 
     .pixel-border {
-        padding: 8px;
+        padding: 0px;
         font-size: 12px;
     }
-    .pixel-border::before {
-        content: "";
-        position: absolute;
-        top: -2px;
-        left: -2px;
-        right: -2px;
-        bottom: -2px;
-        z-index: -1;
-        background-color: black;
-        box-shadow: 0 0 0 1px white, 1px 1px 0 1px black, 2px 2px 0 1px white;
-    }
-
 }
