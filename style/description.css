@@ -77,6 +77,10 @@ body {
     header .container div:nth-child(2){
         margin-top: 30px;
     }
+
+    .hello{
+        display: none;
+    }
     
     .jojo{
         flex-direction: column;
