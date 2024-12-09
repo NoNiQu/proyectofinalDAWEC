@@ -1,39 +1,42 @@
-// Obtener la plantilla de la tarjeta y su contenedor.
+// Obtener la plantilla de la card y su contenedor.
 let plantilla = document.getElementById("cardPokemon");
 let contenedor = plantilla.parentNode;
 contenedor.removeChild(plantilla);
 
-// Variables globales
-let spriteVersion = "red-blue"; // Versión de sprites (red-blue por defecto).
+// Variable para controlar qué sprites mostrar (por defecto, los sprites de Pokémon Rojo/Azul).
+let spriteVersion = "red-blue";
 let pokemonsData = []; // Array para almacenar los datos de los Pokémon.
-let offset = 0; // Posición inicial para cargar Pokémon.
+let offset = 0; // Desplazamiento del ID.
 const limit = 18; // Cantidad de Pokémon a cargar por lote.
 let cargando = false; // Para evitar múltiples llamadas mientras se carga un lote.
 
 // Función para cargar un lote de Pokémon.
 async function cargarPokemonLote(offset, limit) {
+  // Array para guardar las promesas generadas por el fetch.
   const pokemonPromises = [];
 
   for (let i = offset + 1; i <= Math.min(offset + limit, 151); i++) {
+    // Creamos una promesa por cada pokémon a cargar, y la guardamos mientras se procesa.
     pokemonPromises.push(
       fetch(`https://pokeapi.co/api/v2/pokemon/${i}`).then((res) => res.json())
     );
   }
 
   try {
+    // Con await esperamos a que hayan cargado todas las promesas para procesarlas.
     const pokemons = await Promise.all(pokemonPromises);
     pokemons.forEach((pokemon) => {
       pokemonsData.push(pokemon); // Guardar datos en el array global.
-      procesarJSON(pokemon); // Renderizar la tarjeta del Pokémon.
+      procesarJSON(pokemon);
     });
   } catch (e) {
     console.log("Error al cargar el lote de Pokémon:", e);
   } finally {
-    cargando = false; // Permitir nuevas cargas.
+    cargando = false; // Parar la carga hasta que se haga scroll.
   }
 }
 
-// Función para procesar cada Pokémon y generar su tarjeta.
+// Función para procesar cada Pokémon que recoge el fetch.
 function procesarJSON(jsondata) {
   if (!jsondata.id) return;
 
@@ -66,8 +69,9 @@ function procesarJSON(jsondata) {
   // Gestionar los tipos de Pokémon.
   let plantillaTipo = columna.querySelector("#tipoPokemon");
   let contenedorTipos = plantillaTipo.parentNode;
-  contenedorTipos.innerHTML = ""; // Limpiar los tipos existentes.
-
+  // Limpiar los tipos existentes.
+  contenedorTipos.innerHTML = "";
+  // Verificar los tipos.
   let tipos = jsondata.types?.map((data) => data.type.name) || ["normal"];
   tipos = tipos.map((tipo) => (tipo === "electric" ? "elec" : tipo));
   tipos = tipos.map((tipo) => (tipo === "fighting" ? "fight" : tipo));
@@ -116,14 +120,14 @@ function actualizarSpriteEnCard(pokemon, columna) {
   }
 }
 
-// EventListeners para cambiar sprites según la versión seleccionada.
+// EventListeners para los botones que cambian los sprites.
 document.querySelector(".iconoRB").addEventListener("click", () => {
-  spriteVersion = "red-blue"; // Cambiar a sprites de Rojo/Azul.
+  spriteVersion = "red-blue"; // Cambiar a sprites de Rojo/Azul (blanco y negro).
   actualizarSprites();
 });
 
 document.querySelector(".iconoA").addEventListener("click", () => {
-  spriteVersion = "yellow"; // Cambiar a sprites de Amarillo.
+  spriteVersion = "yellow"; // Cambiar a sprites de Amarillo (color).
   actualizarSprites();
 });
 
